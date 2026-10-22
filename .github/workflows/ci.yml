@@ -1,0 +1,20 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Install shellcheck and autopep8
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shellcheck python3-autopep8
+
+      - name: Lint shell scripts and Python
+        run: make check
